@@ -45,6 +45,14 @@ function App() {
     }
   };
 
+  const handleStay = (dealerPoints: number) => {
+    const card = dealCard(deck);
+    if (card && dealerPoints <= 16) {
+      setDealerHand([...dealerHand, card]);
+      setDeck(deck);
+    }
+  };
+
   const handleNewGame = () => {
     const newDeck = shuffleDeck(createDeck());
     setDeck(newDeck);
@@ -61,6 +69,7 @@ function App() {
       <button onClick={handleNewGame}>New Game</button>
       <button onClick={handleDealCard}>Deal Card</button>
       <button onClick={handleHit}>Hit</button>
+      <button onClick={() => handleStay(dealerPoints)}>Stay</button>
       <div>
         <h2>Player Hand</h2>
         {playerHand.map((card, index) => (
