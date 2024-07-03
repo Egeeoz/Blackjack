@@ -39,3 +39,7 @@ export function shuffleDeck(deck: Card[]): Card[] {
 
   return deck;
 }
+
+export function dealCard(deck: Card[]): Card | undefined {
+  return deck.pop();
+}
