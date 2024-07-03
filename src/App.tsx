@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import './App.css';
-import { createDeck, shuffleDeck, dealCard, Card } from './blackjackLogic';
+import {
+  createDeck,
+  shuffleDeck,
+  dealCard,
+  Card,
+  calculatePoints,
+} from './blackjackLogic';
 
 function App() {
   const [deck, setDeck] = useState<Card[]>(shuffleDeck(createDeck()));
@@ -36,6 +42,9 @@ function App() {
     setDealerHand([]);
   };
 
+  const playerPoints = calculatePoints(playerHand);
+  const dealerPoints = calculatePoints(dealerHand);
+
   return (
     <div className="App">
       <button onClick={handleNewGame}>New Game</button>
@@ -47,12 +56,16 @@ function App() {
             {card.value} of {card.suit}
           </div>
         ))}
+        <h3>Total Points: {playerPoints}</h3>
+        {playerPoints > 21 ? <p>Dealer Busts!</p> : null}
         <h2>Dealer Hand</h2>
         {dealerHand.map((card, index) => (
           <div key={index}>
             {card.value} of {card.suit}
           </div>
         ))}
+        <h3>Total Points: {dealerPoints}</h3>
+        {dealerPoints > 21 ? <p>Dealer Busts!</p> : null}
       </div>
     </div>
   );

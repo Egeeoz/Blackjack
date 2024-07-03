@@ -1,6 +1,7 @@
 export interface Card {
   suit: string;
   value: string;
+  points: number;
 }
 
 export function createDeck(): Card[] {
@@ -24,10 +25,17 @@ export function createDeck(): Card[] {
 
   for (let suit of suits) {
     for (let value of values) {
-      deck.push({ suit, value });
+      let points = 0;
+      if (value === 'Ace') {
+        points = 11;
+      } else if (['Jack', 'Queen', 'King'].includes(value)) {
+        points = 10;
+      } else {
+        points = parseInt(value);
+      }
+      deck.push({ suit, value, points });
     }
   }
-
   return deck;
 }
 
@@ -42,4 +50,23 @@ export function shuffleDeck(deck: Card[]): Card[] {
 
 export function dealCard(deck: Card[]): Card | undefined {
   return deck.pop();
+}
+
+export function calculatePoints(hand: Card[]): number {
+  let totalPoints = 0;
+  let acesCount = 0;
+
+  for (let card of hand) {
+    totalPoints += card.points;
+    if (card.value === 'Ace') {
+      acesCount += 1;
+    }
+  }
+
+  while (totalPoints > 21 && acesCount > 0) {
+    totalPoints -= 10;
+    acesCount -= 1;
+  }
+
+  return totalPoints;
 }
