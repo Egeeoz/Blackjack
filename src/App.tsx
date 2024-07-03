@@ -8,27 +8,47 @@ function App() {
   const [dealerHand, setDealerHand] = useState<Card[]>([]);
 
   const handleDealCard = () => {
-    const newCards = [];
-    for (let i = 0; i < 2; i++) {
+    const newPlayerCards = [];
+    const newDealerCards = [];
+
+    for (let i = 0; i < 4; i++) {
       const card = dealCard(deck);
       if (card) {
-        newCards.push(card);
-      } else {
-        console.log('No cards left in deck');
+        if (i % 2 === 0) {
+          newPlayerCards.push(card);
+        } else {
+          newDealerCards.push(card);
+        }
       }
     }
-    if (newCards.length > 0) {
-      setPlayerHand([...playerHand, ...newCards]);
+
+    if (newPlayerCards.length > 0 || newDealerCards.length > 0) {
+      setPlayerHand([...playerHand, ...newPlayerCards]);
+      setDealerHand([...dealerHand, ...newDealerCards]);
       setDeck(deck);
     }
   };
 
+  const handleNewGame = () => {
+    const newDeck = shuffleDeck(createDeck());
+    setDeck(newDeck);
+    setPlayerHand([]);
+    setDealerHand([]);
+  };
+
   return (
     <div className="App">
+      <button onClick={handleNewGame}>New Game</button>
       <button onClick={handleDealCard}>Deal Card</button>
       <div>
         <h2>Player Hand</h2>
         {playerHand.map((card, index) => (
+          <div key={index}>
+            {card.value} of {card.suit}
+          </div>
+        ))}
+        <h2>Dealer Hand</h2>
+        {dealerHand.map((card, index) => (
           <div key={index}>
             {card.value} of {card.suit}
           </div>
