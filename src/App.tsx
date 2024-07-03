@@ -8,6 +8,8 @@ import {
   calculatePoints,
 } from './blackjackLogic';
 
+// TODO when player busts make so player cant press stay
+
 function App() {
   const [deck, setDeck] = useState<Card[]>(shuffleDeck(createDeck()));
   const [playerHand, setPlayerHand] = useState<Card[]>([]);
@@ -16,6 +18,22 @@ function App() {
   const [playerStayed, setPlayerStayed] = useState<Boolean>(false);
   const [playerPoints, setPlayerPoints] = useState<number>(0);
   const [dealerPoints, setDealerPoints] = useState<number>(0);
+  const [playerChips, setPlayerChips] = useState<number>(500);
+  const [playerBet, setPlayerBet] = useState<number>(0);
+
+  const handleBet = () => {
+    const betInput = document.getElementById(
+      'betInput'
+    ) as HTMLInputElement | null;
+    if (betInput) {
+      let betAmount = parseInt(betInput.value, 10);
+      if (!isNaN(betAmount)) {
+        setPlayerBet(betAmount);
+        setPlayerChips(playerChips - betAmount);
+        console.log(playerChips);
+      }
+    }
+  };
 
   const handleDealCard = () => {
     if (activeGame || playerStayed) return;
@@ -55,11 +73,19 @@ function App() {
       const updatedPlayerHand = [...playerHand, card];
       setPlayerHand([...playerHand, card]);
       setDeck(deck);
-      setPlayerPoints(calculatePoints(updatedPlayerHand));
+      const newPlayerPoints = calculatePoints(updatedPlayerHand);
+      setPlayerPoints(newPlayerPoints);
+
+      if (newPlayerPoints > 21) {
+        setActiveGame(false);
+        setPlayerStayed(true);
+      }
     }
   };
 
   const handleStay = () => {
+    if (!activeGame) return;
+
     let updatedDealerHand = [...dealerHand];
 
     while (calculatePoints(updatedDealerHand) <= 16) {
@@ -71,8 +97,13 @@ function App() {
 
     setDealerHand(updatedDealerHand);
     setDeck(deck);
-    setDealerPoints(calculatePoints(updatedDealerHand));
-    setActiveGame(false);
+    const newDealerPoints = calculatePoints(updatedDealerHand);
+    setDealerPoints(newDealerPoints);
+
+    if (newDealerPoints > 21) {
+      setActiveGame(false);
+    }
+
     setPlayerStayed(true);
   };
 
@@ -89,10 +120,6 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={handleNewGame}>New Game</button>
-      <button onClick={handleDealCard}>Deal Card</button>
-      <button onClick={handleHit}>Hit</button>
-      <button onClick={handleStay}>Stay</button>
       <div>
         <h2>Player Hand</h2>
         {playerHand.map((card, index) => (
@@ -116,6 +143,12 @@ function App() {
         </h3>
         {dealerPoints > 21 ? <p>Dealer Busts!</p> : null}
       </div>
+      <button onClick={handleNewGame}>New Game</button>
+      <button onClick={handleDealCard}>Deal Card</button>
+      <button onClick={handleHit}>Hit</button>
+      <button onClick={handleStay}>Stay</button>
+      <input type="text" id="betInput" placeholder="Bet amount" />
+      <button onClick={handleBet}>Place Bet</button>
     </div>
   );
 }
