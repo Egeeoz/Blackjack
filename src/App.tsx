@@ -12,6 +12,7 @@ function App() {
   const [deck, setDeck] = useState<Card[]>(shuffleDeck(createDeck()));
   const [playerHand, setPlayerHand] = useState<Card[]>([]);
   const [dealerHand, setDealerHand] = useState<Card[]>([]);
+  const [activeGame, setActiveGame] = useState<Number>(0);
 
   const handleDealCard = () => {
     const newPlayerCards = [];
@@ -19,7 +20,7 @@ function App() {
 
     for (let i = 0; i < 4; i++) {
       const card = dealCard(deck);
-      if (card) {
+      if (card && activeGame == 0) {
         if (i % 2 === 0) {
           newPlayerCards.push(card);
         } else {
@@ -32,6 +33,15 @@ function App() {
       setPlayerHand([...playerHand, ...newPlayerCards]);
       setDealerHand([...dealerHand, ...newDealerCards]);
       setDeck(deck);
+      setActiveGame(1);
+    }
+  };
+
+  const handleHit = () => {
+    const card = dealCard(deck);
+    if (card) {
+      setPlayerHand([...playerHand, card]);
+      setDeck(deck);
     }
   };
 
@@ -40,6 +50,7 @@ function App() {
     setDeck(newDeck);
     setPlayerHand([]);
     setDealerHand([]);
+    setActiveGame(0);
   };
 
   const playerPoints = calculatePoints(playerHand);
@@ -49,6 +60,7 @@ function App() {
     <div className="App">
       <button onClick={handleNewGame}>New Game</button>
       <button onClick={handleDealCard}>Deal Card</button>
+      <button onClick={handleHit}>Hit</button>
       <div>
         <h2>Player Hand</h2>
         {playerHand.map((card, index) => (
@@ -57,7 +69,7 @@ function App() {
           </div>
         ))}
         <h3>Total Points: {playerPoints}</h3>
-        {playerPoints > 21 ? <p>Dealer Busts!</p> : null}
+        {playerPoints > 21 ? <p>Player Busts!</p> : null}
         <h2>Dealer Hand</h2>
         {dealerHand.map((card, index) => (
           <div key={index}>
