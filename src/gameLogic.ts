@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   createDeck,
   shuffleDeck,
@@ -59,13 +59,13 @@ const gameLogic = () => {
 
       //   Update and set dealer and player hand to the updated hand
       const updatedPlayerHand = [...playerHand, ...filteredPlayerCards];
-      const updateDealerHand = [...dealerHand, ...filteredDealerCards];
+      const updatedDealerHand = [...dealerHand, ...filteredDealerCards];
       setPlayerHand(updatedPlayerHand);
-      setDealerHand(updateDealerHand);
+      setDealerHand(updatedDealerHand);
 
       //   Calculate and update player and dealer points (total card values)
       setPlayerPoints(calculatePoints(updatedPlayerHand));
-      setPlayerPoints(calculatePoints(updateDealerHand));
+      setDealerPoints(calculatePoints(updatedDealerHand));
 
       //   Set game to active so cards cant be dealt again
       setActiveGame(true);
@@ -93,10 +93,10 @@ const gameLogic = () => {
       setPlayerPoints(newPlayerPoints);
 
       //  TODO Check if player bust? maybe somewhere else
-      //   if (newPlayerPoints > 21) {
-      //     setActiveGame(false);
-      //     setPlayerStayed(true);
-      //   }
+      if (newPlayerPoints > 21) {
+        setPlayerStayed(true);
+        setActiveGame(false);
+      }
     }
   };
   //   Function to handle player stay
@@ -126,6 +126,36 @@ const gameLogic = () => {
     setDealerPoints(newDealerPoints);
 
     setPlayerStayed(true);
+  };
+
+  // Run checkGameResults after all states in handlestay has finished
+  useEffect(() => {
+    if (activeGame && playerStayed) {
+      checkGameResults();
+      setActiveGame(false);
+    }
+  }),
+    [playerStayed, dealerPoints];
+
+  // Function to check game winner or loser
+  const checkGameResults = () => {
+    if (playerStayed) {
+      if (playerPoints === 21 && dealerPoints !== 21) {
+        console.log('Blackjack player');
+      } else if (dealerPoints === 21 && playerPoints !== 21) {
+        console.log('Blackjack dealer');
+      } else if (playerPoints > 21) {
+        console.log('Player bust');
+      } else if (dealerPoints > 21) {
+        console.log('Dealer bust');
+      } else if (playerPoints > dealerPoints) {
+        console.log('Player wins noone busts');
+      } else if (dealerPoints > playerPoints) {
+        console.log('Dealer wins noone busts');
+      } else if (playerPoints === dealerPoints) {
+        console.log('Draw');
+      }
+    }
   };
 
   //   Reset the game
