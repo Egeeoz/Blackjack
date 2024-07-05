@@ -17,6 +17,7 @@ const gameLogic = () => {
   const [dealerPoints, setDealerPoints] = useState<number>(0);
   const [playerChips, setPlayerChips] = useState<number>(500);
   const [playerBet, setPlayerBet] = useState<number>(0);
+  const [gameResultMessage, setGameResultMessage] = useState<string>('');
 
   // Function to handle player bet
   const handleBet = (betInput: string) => {
@@ -24,8 +25,10 @@ const gameLogic = () => {
     if (betInput) {
       let betAmount = parseInt(betInput, 10);
       if (!isNaN(betAmount)) {
-        setPlayerBet(betAmount);
-        setPlayerChips(playerChips - betAmount);
+        if (playerChips > 0) {
+          setPlayerBet(betAmount);
+          setPlayerChips(playerChips - betAmount);
+        }
       }
     }
   };
@@ -96,6 +99,7 @@ const gameLogic = () => {
       if (newPlayerPoints > 21) {
         setPlayerStayed(true);
         setActiveGame(false);
+        setGameResultMessage('Player Bust');
       }
     }
   };
@@ -141,21 +145,38 @@ const gameLogic = () => {
   const checkGameResults = () => {
     if (playerStayed) {
       if (playerPoints === 21 && dealerPoints !== 21) {
-        console.log('Blackjack player');
+        const message = 'Blackjack player';
+        setGameResultMessage(message);
+        betPayout(playerBet);
       } else if (dealerPoints === 21 && playerPoints !== 21) {
-        console.log('Blackjack dealer');
+        const message = 'Blackjack dealer';
+        setGameResultMessage(message);
       } else if (playerPoints > 21) {
-        console.log('Player bust');
+        const message = 'Player bust';
+        setGameResultMessage(message);
       } else if (dealerPoints > 21) {
-        console.log('Dealer bust');
+        const message = 'Dealer bust';
+        betPayout(playerBet);
+        setGameResultMessage(message);
       } else if (playerPoints > dealerPoints) {
-        console.log('Player wins noone busts');
+        const message = 'Player wins, noone busts';
+        setGameResultMessage(message);
+        betPayout(playerBet);
       } else if (dealerPoints > playerPoints) {
-        console.log('Dealer wins noone busts');
+        const message = 'Dealer wins, noone busts';
+        setGameResultMessage(message);
       } else if (playerPoints === dealerPoints) {
-        console.log('Draw');
+        const message = 'Draw';
+        setGameResultMessage(message);
       }
     }
+  };
+
+  // Bet payout
+  const betPayout = (bet: number) => {
+    let winnings = 2 * bet;
+    const updatedPlayerchips = playerChips + winnings;
+    setPlayerChips(updatedPlayerchips);
   };
 
   //   Reset the game
@@ -168,8 +189,8 @@ const gameLogic = () => {
     setPlayerStayed(false);
     setPlayerPoints(0);
     setDealerPoints(0);
-    setPlayerChips(500);
     setPlayerBet(0);
+    setGameResultMessage('');
   };
 
   return {
@@ -186,6 +207,7 @@ const gameLogic = () => {
     dealerPoints,
     playerChips,
     playerBet,
+    gameResultMessage,
   };
 };
 

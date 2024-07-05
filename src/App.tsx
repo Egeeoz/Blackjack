@@ -20,6 +20,7 @@ function App() {
     dealerPoints,
     playerChips,
     playerBet,
+    gameResultMessage,
   } = gameLogic();
 
   // Handle the button to place bet
@@ -43,7 +44,6 @@ function App() {
           </div>
         ))}
         <h3>Total Points: {playerPoints}</h3>
-        {playerPoints > 21 ? <p>Player Busts!</p> : null}
         <h2>Dealer Hand</h2>
         {dealerHand.map((card, index) => (
           <div key={index}>
@@ -56,7 +56,7 @@ function App() {
           Total Points:
           {playerStayed ? dealerPoints : calculatePoints(dealerHand.slice(1))}
         </h3>
-        {dealerPoints > 21 ? <p>Dealer Busts!</p> : null}
+        <h4>{gameResultMessage}</h4>
       </div>
       <button onClick={handleNewGame}>New Game</button>
       <button onClick={handleDealCard}>Deal Card</button>
