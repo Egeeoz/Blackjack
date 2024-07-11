@@ -1,4 +1,4 @@
-import './App.css';
+import './styling/App.scss';
 import { calculatePoints } from './blackjackLogic';
 
 import gameLogic from './gameLogic';
@@ -35,39 +35,57 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div>
-        <h2>Player Hand</h2>
-        {playerHand.map((card, index) => (
-          <div key={index}>
-            {card.value} of {card.suit}
-          </div>
-        ))}
-        <h3>Total Points: {playerPoints}</h3>
-        <h2>Dealer Hand</h2>
-        {dealerHand.map((card, index) => (
-          <div key={index}>
-            {index === 0 && activeGame
-              ? 'Hidden Card'
-              : `${card.value} of ${card.suit}`}
-          </div>
-        ))}
-        <h3>
-          Total Points:
-          {playerStayed ? dealerPoints : calculatePoints(dealerHand.slice(1))}
-        </h3>
+    <main className="App">
+      <section className="section-outputs">
+        <section className="hands">
+          <section className="player-hand">
+            {playerHand.map((card, index) => (
+              <section key={index}>
+                <p>
+                  {card.value} of {card.suit}
+                </p>
+              </section>
+            ))}
+          </section>
+
+          <section className="dealer-hand">
+            {dealerHand.map((card, index) => (
+              <section key={index}>
+                <p>
+                  {index === 0 && activeGame
+                    ? 'Hidden Card'
+                    : `${card.value} of ${card.suit}`}
+                </p>
+              </section>
+            ))}
+          </section>
+        </section>
+
+        <section className="hands-title">
+          <h2>Player Hand</h2>
+          <h2>Dealer Hand</h2>
+        </section>
+        <section className="points">
+          <h3>Total Points: {playerPoints}</h3>
+          <h3>
+            Total Points:
+            {playerStayed ? dealerPoints : calculatePoints(dealerHand.slice(1))}
+          </h3>
+        </section>
         <h4>{gameResultMessage}</h4>
-      </div>
-      <button onClick={handleNewGame}>New Game</button>
-      <button onClick={handleDealCard}>Deal Card</button>
-      <button onClick={handleHit}>Hit</button>
-      <button onClick={handleStay}>Stay</button>
-      <input type="text" id="betInput" placeholder="Bet amount" />
-      <p>
-        total bet: {playerBet} <br /> player chips: {playerChips}
-      </p>
-      <button onClick={handlePlaceBet}>Place Bet</button>
-    </div>
+      </section>
+      <section className="section-inputs">
+        <button onClick={handleNewGame}>New Game</button>
+        <button onClick={handleDealCard}>Deal Card</button>
+        <button onClick={handleHit}>Hit</button>
+        <button onClick={handleStay}>Stay</button>
+        <input type="text" id="betInput" placeholder="Bet amount" />
+        <p>
+          total bet: {playerBet} <br /> player chips: {playerChips}
+        </p>
+        <button onClick={handlePlaceBet}>Place Bet</button>
+      </section>
+    </main>
   );
 }
 

@@ -1,0 +1,88 @@
+@import 'variables';
+
+.App {
+  text-align: center;
+  font-family: $base-font;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+}
+
+.section-outputs {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-inputs {
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: flex-end;
+}
+
+.hands {
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 5rem;
+
+  p {
+    margin: 0.25rem;
+  }
+}
+
+.player-hand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 50%;
+}
+
+.dealer-hand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 50%;
+}
+
+.hands-title {
+  height: 30vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  h2 {
+    margin: 0 3rem 0 3rem;
+  }
+}
+
+.points {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  h3 {
+    margin: 1rem 3.5rem 1rem 3.1rem;
+  }
+}
+
+button {
+  margin: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+h2 {
+  margin-top: 20px;
+}
+
+.card {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
