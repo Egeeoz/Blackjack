@@ -1,5 +1,5 @@
 import { Card } from '../blackjackLogic';
-
+import CardIcon from './CardIcon';
 interface PlayerHandProps {
   playerHand: Card[];
 }
@@ -10,7 +10,8 @@ const PlayerHand = ({ playerHand }: PlayerHandProps) => {
       {playerHand.map((card, index) => (
         <section key={index}>
           <p>
-            {card.value} of {card.suit}
+            {/* {card.value} of {card.suit} */}
+            <CardIcon card={card} />
           </p>
         </section>
       ))}

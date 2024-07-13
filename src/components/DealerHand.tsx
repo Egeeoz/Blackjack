@@ -1,4 +1,5 @@
 import { Card } from '../blackjackLogic';
+import CardIcon from './CardIcon';
 
 interface DealerHandProps {
   dealerHand: Card[];
@@ -11,9 +12,11 @@ const DealerHand = ({ dealerHand, activeGame }: DealerHandProps) => {
       {dealerHand.map((card, index) => (
         <section key={index}>
           <p>
-            {index === 0 && activeGame
-              ? 'Hidden Card'
-              : `${card.value} of ${card.suit}`}
+            {index === 0 && activeGame ? (
+              <p className="hidden-card">?</p>
+            ) : (
+              <CardIcon card={card} />
+            )}
           </p>
         </section>
       ))}
