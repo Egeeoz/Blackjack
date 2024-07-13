@@ -3,6 +3,9 @@ import { calculatePoints } from './blackjackLogic';
 import gameLogic from './gameLogic';
 import Button from './components/Button.tsx';
 import Input from './components/Input.tsx';
+import PlayerHand from './components/PlayerHand.tsx';
+import DealerHand from './components/DealerHand.tsx';
+import TotalPoints from './components/TotalPoints.tsx';
 
 // TODO Decide winner and loser
 
@@ -39,27 +42,8 @@ function App() {
     <main className="App">
       <section className="section-outputs">
         <section className="hands">
-          <section className="player-hand">
-            {playerHand.map((card, index) => (
-              <section key={index}>
-                <p>
-                  {card.value} of {card.suit}
-                </p>
-              </section>
-            ))}
-          </section>
-
-          <section className="dealer-hand">
-            {dealerHand.map((card, index) => (
-              <section key={index}>
-                <p>
-                  {index === 0 && activeGame
-                    ? 'Hidden Card'
-                    : `${card.value} of ${card.suit}`}
-                </p>
-              </section>
-            ))}
-          </section>
+          <PlayerHand playerHand={playerHand} />
+          <DealerHand dealerHand={dealerHand} activeGame={activeGame} />
         </section>
 
         <section className="hands-title">
@@ -67,11 +51,13 @@ function App() {
           <h2>Dealer Hand</h2>
         </section>
         <section className="points">
-          <h3>Total Points: {playerPoints}</h3>
-          <h3>
-            Total Points:
-            {playerStayed ? dealerPoints : calculatePoints(dealerHand.slice(1))}
-          </h3>
+          <TotalPoints label="Total Points: " points={playerPoints} />
+          <TotalPoints
+            label="Total Points: "
+            points={
+              playerStayed ? dealerPoints : calculatePoints(dealerHand.slice(1))
+            }
+          />
         </section>
         <h4>{gameResultMessage}</h4>
       </section>
@@ -80,11 +66,11 @@ function App() {
         <Button handleClick={handleDealCard} text="Deal Card" />
         <Button handleClick={handleHit} text="Hit" />
         <Button handleClick={handleStay} text="Stay" />
-        <Input />
-        {/* <input type="text" id="betInput" placeholder="Bet amount" /> */}
+
         <p>
           total bet: {playerBet} <br /> player chips: {playerChips}
         </p>
+        <Input />
         <button onClick={handlePlaceBet}>Place Bet</button>
       </section>
     </main>
