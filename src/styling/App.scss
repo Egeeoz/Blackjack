@@ -5,7 +5,20 @@
   font-family: $base-font;
   display: flex;
   flex-direction: column;
-  max-height: 90vh;
+  max-height: 85vh;
+
+  h4 {
+    margin: 0;
+  }
+}
+
+.table {
+  width: 95%;
+  height: 85vh;
+  background-color: $base-background;
+  border-radius: 500px;
+  margin: 2rem auto;
+  border: 5px solid black;
 }
 
 .section-outputs {
@@ -35,19 +48,17 @@
 
 .player-hand {
   display: flex;
-  // flex-direction: column;
   justify-content: flex-end;
   width: 50%;
 }
 
 .dealer-hand {
   display: flex;
-  // flex-direction: column;
   width: 50%;
 }
 
 .hands-title {
-  height: 30vh;
+  // height: 30vh;
   display: flex;
   align-items: flex-end;
   justify-content: center;

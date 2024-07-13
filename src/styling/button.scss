@@ -8,3 +8,10 @@ button {
   border-width: medium;
   font-weight: 600;
 }
+
+button:hover {
+  color: $button-hover-color;
+  transition: ease-in-out 0.2s;
+  background-color: $button-bg-hover;
+  border-color: $button-hover-border;
+}

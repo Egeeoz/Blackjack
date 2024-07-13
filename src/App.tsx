@@ -40,38 +40,41 @@ function App() {
 
   return (
     <main className="App">
-      <section className="section-outputs">
-        <section className="hands">
-          <PlayerHand playerHand={playerHand} />
-          <DealerHand dealerHand={dealerHand} activeGame={activeGame} />
-        </section>
+      <section className="table">
+        <section className="section-outputs">
+          <section className="hands">
+            <PlayerHand playerHand={playerHand} />
+            <DealerHand dealerHand={dealerHand} activeGame={activeGame} />
+          </section>
 
-        <section className="hands-title">
-          <h2>Player Hand</h2>
-          <h2>Dealer Hand</h2>
+          <section className="hands-title">
+            <h2>Player Hand</h2>
+            <h2>Dealer Hand</h2>
+          </section>
+          <section className="points">
+            <TotalPoints label="Total Points: " points={playerPoints} />
+            <TotalPoints
+              label="Total Points: "
+              points={
+                playerStayed
+                  ? dealerPoints
+                  : calculatePoints(dealerHand.slice(1))
+              }
+            />
+          </section>
+          <h4>{gameResultMessage}</h4>
         </section>
-        <section className="points">
-          <TotalPoints label="Total Points: " points={playerPoints} />
-          <TotalPoints
-            label="Total Points: "
-            points={
-              playerStayed ? dealerPoints : calculatePoints(dealerHand.slice(1))
-            }
-          />
+        <section className="section-inputs">
+          <Button handleClick={handleNewGame} text="New Game" />
+          <Button handleClick={handleDealCard} text="Deal Card" />
+          <Button handleClick={handleHit} text="Hit" />
+          <Button handleClick={handleStay} text="Stay" />
+          <p>
+            total bet: {playerBet} <br /> player chips: {playerChips}
+          </p>
+          <Input />
+          <Button handleClick={handlePlaceBet} text="Place Bet" />
         </section>
-        <h4>{gameResultMessage}</h4>
-      </section>
-      <section className="section-inputs">
-        <Button handleClick={handleNewGame} text="New Game" />
-        <Button handleClick={handleDealCard} text="Deal Card" />
-        <Button handleClick={handleHit} text="Hit" />
-        <Button handleClick={handleStay} text="Stay" />
-
-        <p>
-          total bet: {playerBet} <br /> player chips: {playerChips}
-        </p>
-        <Input />
-        <button onClick={handlePlaceBet}>Place Bet</button>
       </section>
     </main>
   );
