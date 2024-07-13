@@ -1,0 +1,10 @@
+@import '../styling/variables';
+
+button {
+  font-family: $base-font;
+  background-color: $button-bg-color;
+  border-color: $button-border-color;
+  border-radius: 10px;
+  border-width: medium;
+  font-weight: 600;
+}

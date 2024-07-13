@@ -1,7 +1,8 @@
 import './styling/App.scss';
 import { calculatePoints } from './blackjackLogic';
-
 import gameLogic from './gameLogic';
+import Button from './components/Button.tsx';
+import Input from './components/Input.tsx';
 
 // TODO Decide winner and loser
 
@@ -75,11 +76,12 @@ function App() {
         <h4>{gameResultMessage}</h4>
       </section>
       <section className="section-inputs">
-        <button onClick={handleNewGame}>New Game</button>
-        <button onClick={handleDealCard}>Deal Card</button>
-        <button onClick={handleHit}>Hit</button>
-        <button onClick={handleStay}>Stay</button>
-        <input type="text" id="betInput" placeholder="Bet amount" />
+        <Button handleClick={handleNewGame} text="New Game" />
+        <Button handleClick={handleDealCard} text="Deal Card" />
+        <Button handleClick={handleHit} text="Hit" />
+        <Button handleClick={handleStay} text="Stay" />
+        <Input />
+        {/* <input type="text" id="betInput" placeholder="Bet amount" /> */}
         <p>
           total bet: {playerBet} <br /> player chips: {playerChips}
         </p>

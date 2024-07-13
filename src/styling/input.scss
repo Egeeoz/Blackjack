@@ -1,0 +1,10 @@
+@import 'variables';
+
+input {
+  font-family: $base-font;
+  height: 2rem;
+  border: 2px solid $button-border-color;
+  background-color: $button-bg-color;
+  border-radius: 10px;
+  border-width: medium;
+}
