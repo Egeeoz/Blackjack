@@ -64,16 +64,16 @@ function App() {
           </section>
           <h4>{gameResultMessage}</h4>
         </section>
+        <p className="bet-text">
+          total bet: {playerBet} <br /> player chips: {playerChips}
+        </p>
         <section className="section-inputs">
           <Button handleClick={handleNewGame} text="New Game" />
           <Button handleClick={handleDealCard} text="Deal Card" />
           <Button handleClick={handleHit} text="Hit" />
           <Button handleClick={handleStay} text="Stay" />
-          <p className="bet-text">
-            total bet: {playerBet} <br /> player chips: {playerChips}
-          </p>
-          <Input />
           <Button handleClick={handlePlaceBet} text="Place Bet" />
+          <Input />
         </section>
       </section>
     </main>
