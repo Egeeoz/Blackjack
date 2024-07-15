@@ -69,7 +69,7 @@ function App() {
           <Button handleClick={handleDealCard} text="Deal Card" />
           <Button handleClick={handleHit} text="Hit" />
           <Button handleClick={handleStay} text="Stay" />
-          <p>
+          <p className="bet-text">
             total bet: {playerBet} <br /> player chips: {playerChips}
           </p>
           <Input />

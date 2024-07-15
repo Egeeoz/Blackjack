@@ -1,21 +1,31 @@
 import { Card } from '../blackjackLogic';
 import CardIcon from './CardIcon';
+import { motion } from 'framer-motion';
+import { cardAnimation } from './CardIcon';
 interface PlayerHandProps {
   playerHand: Card[];
 }
 
 const PlayerHand = ({ playerHand }: PlayerHandProps) => {
   return (
-    <section className="player-hand">
+    <motion.section
+      className="player-hand"
+      initial="hidden"
+      animate="visible"
+      variants={{
+        visible: {
+          transition: {
+            staggerChildren: 0.75,
+          },
+        },
+      }}
+    >
       {playerHand.map((card, index) => (
-        <section key={index}>
-          <p>
-            {/* {card.value} of {card.suit} */}
-            <CardIcon card={card} />
-          </p>
-        </section>
+        <motion.div key={index} variants={cardAnimation(index)}>
+          <CardIcon card={card} />
+        </motion.div>
       ))}
-    </section>
+    </motion.section>
   );
 };
 

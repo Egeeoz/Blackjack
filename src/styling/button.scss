@@ -1,17 +1,20 @@
 @import '../styling/variables';
 
 button {
-  font-family: $base-font;
+  font-family: $body-content-font;
+  font-size: $text-size-xl;
   background-color: $button-bg-color;
   border-color: $button-border-color;
   border-radius: 10px;
   border-width: medium;
   font-weight: 600;
+  margin: 20px;
+  padding: 10px 20px;
 }
 
 button:hover {
   color: $button-hover-color;
-  transition: ease-in-out 0.2s;
+  transition: ease-in-out 0.25s;
   background-color: $button-bg-hover;
   border-color: $button-hover-border;
 }

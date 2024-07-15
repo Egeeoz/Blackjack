@@ -53,6 +53,17 @@ import {
   GiCardKingSpades,
 } from 'react-icons/gi';
 import { Card } from '../blackjackLogic';
+import { motion } from 'framer-motion';
+import '../styling/cardIcon.scss';
+export const cardAnimation = (index: number) => ({
+  hidden: { x: -100, y: -100, opacity: 0 },
+  visible: {
+    x: 0,
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.5, delay: index * 0.75 },
+  },
+});
 
 interface CardIconProps {
   card: Card;
@@ -155,7 +166,14 @@ const CardIcon: React.FC<CardIconProps> = ({ card }) => {
 
   // Return the corresponding icon for the card, or default if not found
   return (
-    <div className="card-icon">{cardIcons[value]?.[suit] || defaultIcon}</div>
+    <motion.div
+      variants={cardAnimation(0)}
+      initial="hidden"
+      animate="visible"
+      className="card-icon"
+    >
+      {cardIcons[value]?.[suit] || defaultIcon}
+    </motion.div>
   );
 };
 

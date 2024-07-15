@@ -1,5 +1,7 @@
 import { Card } from '../blackjackLogic';
 import CardIcon from './CardIcon';
+import { motion } from 'framer-motion';
+import { cardAnimation } from './CardIcon';
 
 interface DealerHandProps {
   dealerHand: Card[];
@@ -8,19 +10,28 @@ interface DealerHandProps {
 
 const DealerHand = ({ dealerHand, activeGame }: DealerHandProps) => {
   return (
-    <section className="dealer-hand">
+    <motion.section
+      className="dealer-hand"
+      initial="hidden"
+      animate="visible"
+      variants={{
+        visible: {
+          transition: {
+            staggerChildren: 0.75,
+          },
+        },
+      }}
+    >
       {dealerHand.map((card, index) => (
-        <section key={index}>
-          <p>
-            {index === 0 && activeGame ? (
-              <p className="hidden-card">?</p>
-            ) : (
-              <CardIcon card={card} />
-            )}
-          </p>
-        </section>
+        <motion.div key={index} variants={cardAnimation(index)}>
+          {index === 0 && activeGame ? (
+            <div className="card-icon hidden-card">?</div>
+          ) : (
+            <CardIcon card={card} />
+          )}
+        </motion.div>
       ))}
-    </section>
+    </motion.section>
   );
 };
 
