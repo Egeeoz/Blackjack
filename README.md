@@ -30,7 +30,7 @@ Before you deal the cards, you must place a bet. Enter your desired bet amount a
 
 ### Dealing Cards
 
-After placing your bet, click the 'Deal' button to receive your cards. The game will deal two cards to you and two cards to the dealer, with one of the dealer's cards hidden.
+After placing your bet, click the 'Deal Cards' button to receive your cards. The game will deal two cards to you and two cards to the dealer, with one of the dealer's cards hidden.
 
 ### New Game
 
