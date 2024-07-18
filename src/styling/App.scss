@@ -84,3 +84,14 @@
   font-size: $text-size;
   font-weight: bold;
 }
+
+.game-message-container {
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-message {
+  margin: 0;
+}

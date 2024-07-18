@@ -4,9 +4,6 @@ button {
   font-family: $body-content-font;
   font-size: $text-size-xl;
   background-color: $button-bg-color;
-  // border-color: $button-border-color;
-
-  // border-width: medium;
   max-height: 6vh;
   border: 4px solid #53220e;
   box-shadow: 5px 10px 0px 0px rgba(0, 0, 0, 0.5);
@@ -14,11 +11,13 @@ button {
   font-weight: 600;
   margin: 20px;
   padding: 10px 20px;
+  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
 }
 
 button:hover {
-  color: $button-hover-color;
-  transition: ease-in-out 0.25s;
-  background-color: $button-bg-hover;
-  border-color: $button-hover-border;
+  color: #ffd700;
+  background-color: #53220e;
+  border-color: #ffd700;
+  transform: scale(1.2);
+  box-shadow: 10px 14px 0px 0px rgba(0, 0, 0, 0.5);
 }

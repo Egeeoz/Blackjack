@@ -1,8 +1,9 @@
 @import 'variables';
 
-:root {
+html {
+  height: 100vh;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #414a4c;
+  background-color: #1a1a1a;
 }

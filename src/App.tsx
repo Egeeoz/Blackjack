@@ -62,7 +62,9 @@ function App() {
               }
             />
           </section>
-          <h4>{gameResultMessage}</h4>
+          <section className="game-message-container">
+            <h4 className="game-message">{gameResultMessage}</h4>
+          </section>
         </section>
         <p className="bet-text">
           total bet: {playerBet} <br /> player chips: {playerChips}
