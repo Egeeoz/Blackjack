@@ -11,14 +11,14 @@
   justify-content: space-between;
   width: 95%;
   height: 85vh;
-  background-color: $base-background;
+  background-color: $table-background;
   border-radius: 500px;
   margin: 2rem auto;
   box-shadow: 0 0 0 2px #ffd700, 0 0 0 12px #673622, 0 0 0 18px #53220e;
 
   h4 {
     font-size: $text-size-xxl;
-    color: #ffd700;
+    color: $button-border-color;
     margin: 0;
   }
 }

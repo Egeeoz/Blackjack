@@ -172,11 +172,11 @@ const gameLogic = () => {
         betPayout(playerBet);
         setGameResultMessage(message);
       } else if (playerPoints > dealerPoints) {
-        const message = 'Player wins, noone busts';
+        const message = 'Player wins, no one busts';
         setGameResultMessage(message);
         betPayout(playerBet);
       } else if (dealerPoints > playerPoints) {
-        const message = 'Dealer wins, noone busts';
+        const message = 'Dealer wins, no one busts';
         setGameResultMessage(message);
       } else if (playerPoints === dealerPoints) {
         const message = 'Draw';

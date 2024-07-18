@@ -4,6 +4,7 @@ export interface Card {
   points: number;
 }
 
+// Function to create deck
 export function createDeck(): Card[] {
   const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
   const values = [
@@ -39,6 +40,7 @@ export function createDeck(): Card[] {
   return deck;
 }
 
+// Function that shuffles the deck
 export function shuffleDeck(deck: Card[]): Card[] {
   for (let i = deck.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -48,10 +50,12 @@ export function shuffleDeck(deck: Card[]): Card[] {
   return deck;
 }
 
+// Function to deal card
 export function dealCard(deck: Card[]): Card | undefined {
   return deck.pop();
 }
 
+// Function to calculate user points
 export function calculatePoints(hand: Card[]): number {
   let totalPoints = 0;
   let acesCount = 0;
