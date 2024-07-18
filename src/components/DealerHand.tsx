@@ -10,28 +10,17 @@ interface DealerHandProps {
 
 const DealerHand = ({ dealerHand, activeGame }: DealerHandProps) => {
   return (
-    <motion.section
-      className="dealer-hand"
-      initial="hidden"
-      animate="visible"
-      variants={{
-        visible: {
-          transition: {
-            staggerChildren: 0.75,
-          },
-        },
-      }}
-    >
+    <section className="dealer-hand">
       {dealerHand.map((card, index) => (
         <motion.div key={index} variants={cardAnimation(index)}>
           {index === 0 && activeGame ? (
             <div className="card-icon hidden-card">?</div>
           ) : (
-            <CardIcon card={card} />
+            <CardIcon key={index} card={card} index={index} />
           )}
         </motion.div>
       ))}
-    </motion.section>
+    </section>
   );
 };
 

@@ -8,24 +8,13 @@ interface PlayerHandProps {
 
 const PlayerHand = ({ playerHand }: PlayerHandProps) => {
   return (
-    <motion.section
-      className="player-hand"
-      initial="hidden"
-      animate="visible"
-      variants={{
-        visible: {
-          transition: {
-            staggerChildren: 0.75,
-          },
-        },
-      }}
-    >
+    <section className="player-hand">
       {playerHand.map((card, index) => (
         <motion.div key={index} variants={cardAnimation(index)}>
-          <CardIcon card={card} />
+          <CardIcon key={index} card={card} index={index} />
         </motion.div>
       ))}
-    </motion.section>
+    </section>
   );
 };
 
