@@ -1,3 +1,4 @@
+https://egeeoz.github.io/Blackjack/
 # Blackjack
 
 Welcome to the Blackjack game! This project is a web-based implementation of the classic casino card game, built with React and Vite.
