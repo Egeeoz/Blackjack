@@ -76,7 +76,7 @@ function App() {
         </p>
         <section className="section-inputs">
           <Button handleClick={handleNewGame} text="New Game" />
-          <Button handleClick={handleDealCard} text="Deal Card" />
+          <Button handleClick={handleDealCard} text="Deal Cards" />
           <Button handleClick={handleHit} text="Hit" />
           <Button handleClick={handleStay} text="Stay" />
           <Button handleClick={handlePlaceBet} text="Place Bet" />
