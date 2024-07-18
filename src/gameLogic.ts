@@ -21,11 +21,12 @@ const gameLogic = () => {
 
   // Function to handle player bet
   const handleBet = (betInput: string) => {
-    // If there is a bet the parse it and pass it into the state
+    if (playerBet) return;
     if (betInput) {
+      // If there is a bet the parse it and pass it into the state
       let betAmount = parseInt(betInput, 10);
       if (!isNaN(betAmount)) {
-        if (playerChips > 0) {
+        if (playerChips > 0 && betAmount <= playerChips) {
           setPlayerBet(betAmount);
           setPlayerChips(playerChips - betAmount);
         }
