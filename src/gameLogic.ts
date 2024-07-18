@@ -8,7 +8,13 @@ import {
 } from './blackjackLogic';
 
 const gameLogic = () => {
-  const [deck, setDeck] = useState<Card[]>(shuffleDeck(createDeck()));
+  // Creates 2 decks
+  const createDoubleDeck = (): Card[] => {
+    const singleDeck = createDeck();
+    return [...singleDeck, ...singleDeck];
+  };
+
+  const [deck, setDeck] = useState<Card[]>(shuffleDeck(createDoubleDeck()));
   const [playerHand, setPlayerHand] = useState<Card[]>([]);
   const [dealerHand, setDealerHand] = useState<Card[]>([]);
   const [activeGame, setActiveGame] = useState<boolean>(false);
@@ -37,6 +43,12 @@ const gameLogic = () => {
   //   Function to deal cards to player and dealer
   const handleDealCard = () => {
     if (!playerBet || activeGame || playerStayed) return;
+
+    // If there are less than 10 cards in the deck, shuffle in a new deck (2 decks)
+    if (deck.length < 10) {
+      const newDeck = shuffleDeck(createDoubleDeck());
+      setDeck(newDeck);
+    }
 
     const newPlayerCards = [];
     const newDealerCards = [];
@@ -182,7 +194,7 @@ const gameLogic = () => {
 
   //   Reset the game
   const handleNewGame = () => {
-    const newDeck = shuffleDeck(createDeck());
+    const newDeck = shuffleDeck(createDoubleDeck());
     setDeck(newDeck);
     setPlayerHand([]);
     setDealerHand([]);

@@ -65,6 +65,11 @@ function App() {
           <section className="game-message-container">
             <h4 className="game-message">{gameResultMessage}</h4>
           </section>
+          <section>
+            <h2 className="background-text">
+              The Dealer must draw on 16 or less, and stand on 17 or more
+            </h2>
+          </section>
         </section>
         <p className="bet-text">
           total bet: {playerBet} <br /> player chips: {playerChips}
